@@ -805,8 +805,7 @@ void DragSelectionTool::VectorMoveSelectionTool::leftButtonDown(
 
 void DragSelectionTool::VectorMoveSelectionTool::leftButtonDrag(
     const TPointD &pos, const TMouseEvent &e) {
-  if (norm2(pos - getStartPos()) > l_dragThreshold * getTool()->getPixelSize())
-    m_moveSelection->leftButtonDrag(pos, e);
+  m_moveSelection->leftButtonDrag(pos, e);
 }
 
 //=============================================================================

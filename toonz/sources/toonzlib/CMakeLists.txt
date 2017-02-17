@@ -128,7 +128,6 @@ set(MOC_HEADERS
     ../include/toonz/txshmeshcolumn.h
     ../include/toonz/textureutils.h
     ../include/toutputproperties.h
-    xshhandlemanager.h
     sandor_fxs/blend.h
     sandor_fxs/BlurMatrix.h
     sandor_fxs/CallCircle.h
@@ -152,6 +151,7 @@ set(MOC_HEADERS
     sandor_fxs/YOMBParam.h
     texturemanager.h
     imagebuilders.h
+    xshhandlemanager.h
 )
 
 set(HEADERS ${MOC_HEADERS})
