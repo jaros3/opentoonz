@@ -10,16 +10,12 @@
 #include "xshcolumnviewer.h"
 #include "xshrowviewer.h"
 #include "xshnoteviewer.h"
+#include "xshtoolbar.h"
 #include "cellkeyframeselection.h"
 #include "toonzqt/spreadsheetviewer.h"
 
-#ifdef _WIN32
-#define XSHEET_FONT_SIZE 9
+#define XSHEET_FONT_PX_SIZE 12
 #define H_ADJUST 2
-#else
-#define XSHEET_FONT_SIZE 11
-#define H_ADJUST 0
-#endif
 
 // forward declaration
 class TXsheet;
@@ -318,13 +314,15 @@ class XsheetViewer final : public QFrame, public Spreadsheet::FrameScroller {
   XsheetScrollArea *m_columnScrollArea;
   XsheetScrollArea *m_rowScrollArea;
   XsheetScrollArea *m_noteScrollArea;
+  XsheetScrollArea *m_toolbarScrollArea;
 
   XsheetGUI::ColumnArea *m_columnArea;
   XsheetGUI::RowArea *m_rowArea;
   XsheetGUI::CellArea *m_cellArea;
   XsheetGUI::NoteArea *m_noteArea;
+  XsheetGUI::Toolbar *m_toolbar;
 
-  int m_x0, m_y0;
+  int m_x0, m_y0, m_toolbarHeight;
   int m_timerId;
   QPoint m_autoPanSpeed;
   QPoint m_lastAutoPanPos;
@@ -436,7 +434,7 @@ public:
   void updateCells() { m_cellArea->update(m_cellArea->visibleRegion()); }
   void updateRows() { m_rowArea->update(m_rowArea->visibleRegion()); }
   void updateColumns() { m_columnArea->update(m_columnArea->visibleRegion()); }
-
+  void updatePanelsSizes();
   bool refreshContentSize(int scrollDx, int scrollDy);
 
   void updateAreeSize();
@@ -694,7 +692,7 @@ public slots:
   void updateCellRowAree();
 
   void onScrubStopped();
-
+  void onPreferenceChanged(const QString &prefName);
   //! Aggiorna il "titolo" del widget.
   void changeWindowTitle();
 
